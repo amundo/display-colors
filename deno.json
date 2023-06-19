@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "build": "pandoc -f markdown -t html --section-divs --css display-colors-docs.css --template=template.html -o display-colors-docs.html display-colors-docs.md",
+    "build-gpt": "pandoc -f markdown -t html --section-divs --css display-colors-docs.css --template=template.html -o display-colors-gpt-docs.html display-colors-gpt-docs.md"
+
+  }
+}

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>  
+  <title>&lt;display-colors></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="display-colors.css">
+
+</head>
+<body>
+
+    <display-colors src="colors.css"></display-colors>  
+
+<script type="module">
+import {DisplayColors} from './DisplayColors.js'
+
+window.DisplayColors = document.querySelector('display-colors')
+</script>
+
+</body>
+</html>
