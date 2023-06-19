@@ -1,3 +1,5 @@
+@import "imported-colors.css";
+
 :root {
   --accent-color: hsl(15.7, 75.9%, 27.6%);
   --papyrus-background: hsl(39.7, 28%, 95.6%);

@@ -1,0 +1,5 @@
+@import "super-imported-colors.css";
+
+:root {
+  --red: red;
+}

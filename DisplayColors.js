@@ -1,5 +1,7 @@
+import { extractColors } from "./extract-colors.js"
+
 export class DisplayColors extends HTMLElement {
-  #colors = [];
+  #colors = []
 
   constructor() {
     super()
@@ -7,56 +9,49 @@ export class DisplayColors extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['src'];
+    return ["src"]
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === 'src' && oldValue !== newValue) {
-      this.fetchCSS(newValue);
+    if (name === "src" && oldValue !== newValue) {
+      this.fetchCSS(newValue)
     }
   }
 
   async fetchCSS(src) {
     try {
-      const response = await fetch(src);
+      const response = await fetch(src)
       if (!response.ok) {
-        throw new Error(`Failed to fetch CSS file: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Failed to fetch CSS file: ${response.status} ${response.statusText}`,
+        )
       }
-      const cssContent = await response.text();
-      let style = document.createElement('style')
+      const cssContent = await response.text()
+      let style = document.createElement("style")
       style.textContent = cssContent
       document.head.append(style)
-      this.data = this.parseCSS(cssContent);
+      this.data = await this.parseCSS(cssContent)
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error)
     }
   }
 
-  set data(colors){
+  set data(colors) {
     this.#colors = colors
     this.render()
   }
 
-  get data(){
+  get data() {
     return this.#colors
   }
 
   parseCSS(cssContent) {
-    const colorRegex = /--([a-zA-Z0-9-]+):\s*(.*?);/g;
-    const colors = [];
-
-    let match;
-    while ((match = colorRegex.exec(cssContent)) !== null) {
-      const [, variable, value] = match;
-      colors.push({ variable, value });
-    }
-
-    return colors
+    return extractColors(cssContent)
   }
 
   render() {
     this.querySelector("table").innerHTML = ``
-    let rows =  this.#colors
+    let rows = this.#colors
       .reduce((fragment, { variable, value }) => {
         let tr = document.createElement("tr")
         tr.innerHTML = `
@@ -71,4 +66,4 @@ export class DisplayColors extends HTMLElement {
   }
 }
 
-customElements.define('display-colors', DisplayColors);
+customElements.define("display-colors", DisplayColors)
