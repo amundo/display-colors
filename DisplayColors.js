@@ -26,10 +26,19 @@ export class DisplayColors extends HTMLElement {
       let style = document.createElement('style')
       style.textContent = cssContent
       document.head.append(style)
-      this.parseCSS(cssContent);
+      this.data = this.parseCSS(cssContent);
     } catch (error) {
       console.error('Error:', error);
     }
+  }
+
+  set data(colors){
+    this.#colors = colors
+    this.render()
+  }
+
+  get data(){
+    return this.#colors
   }
 
   parseCSS(cssContent) {
@@ -42,8 +51,7 @@ export class DisplayColors extends HTMLElement {
       colors.push({ variable, value });
     }
 
-    this.#colors = colors;
-    this.render()
+    return colors
   }
 
   render() {
