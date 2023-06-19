@@ -18,7 +18,7 @@ export let extractColors = async (cssContent, baseUrl = import.meta.url) => {
       importedCssContent,
       absoluteUrl.href,
     )
-        ]    colors.push(...importedColors)
+    colors.push(...importedColors)
   }
 
   return colors
