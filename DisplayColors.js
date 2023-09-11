@@ -37,6 +37,7 @@ export class DisplayColors extends HTMLElement {
   }
 
   set data(colors) {
+    console.table(colors)
     this.#colors = colors
     this.render()
   }
@@ -51,6 +52,7 @@ export class DisplayColors extends HTMLElement {
 
   render() {
     this.querySelector("table").innerHTML = ``
+
     let rows = this.#colors
       .reduce((fragment, { variable, value }) => {
         let tr = document.createElement("tr")

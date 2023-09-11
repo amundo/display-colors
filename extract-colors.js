@@ -1,4 +1,4 @@
-export let extractColors = async (cssContent, baseUrl = import.meta.url) => {
+ let extractColors = async (cssContent, baseUrl = import.meta.url) => {
   const colorRegex = /--([a-zA-Z0-9-]+):\s*(.*?);/g
   const colors = []
 
@@ -23,3 +23,5 @@ export let extractColors = async (cssContent, baseUrl = import.meta.url) => {
 
   return colors
 }
+
+export {extractColors}
